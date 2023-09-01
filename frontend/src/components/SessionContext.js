@@ -9,7 +9,7 @@ export const useSession = () => {
 };
 
 export const SessionProvider = ({ children }) => {
-  const [sessionData, setSessionData] = useState({ selectedLanguage: 'en', selectedType: '' });
+  const [sessionData, setSessionData] = useState({ selectedLanguage: 'en', selectedType: '', searchString: ''});
 
   const updateSessionData = (newData) => {
     setSessionData({ ...sessionData, ...newData });

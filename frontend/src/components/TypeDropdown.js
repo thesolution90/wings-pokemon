@@ -7,7 +7,8 @@ const TypeDropdown = () => {
   const { sessionData, updateSessionData } = useSession()
   const onFilterChange = (event) => {
     const selectedType = event.target.value
-    updateSessionData({ selectedType })
+    const searchString = ''
+    updateSessionData({ selectedType, searchString })
   }
 
   return (

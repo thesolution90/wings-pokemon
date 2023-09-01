@@ -53,6 +53,35 @@ app.get('/getfilteredpokeinfo/:type/:lang', (req, res) => {
     res.json(response)        
 })
 
+app.get('/searchforpokeid/:id/:lang', (req, res) => {
+    const pokeId = parseInt(req.params.id)
+    const lang = req.params.lang
+
+    const response = pokeList
+        .filter((element) => element.dex === pokeId)
+        .map((element) => {
+            const newName = element.name[lang]
+            let uuid
+            if (element.hasOwnProperty('type')) {
+                uuid = `${element.dex.toString().padStart(3, '0')}${element.type}`
+            } else {
+                uuid = `${element.dex.toString().padStart(3, '0')}_00`
+            }
+            if (element.hasOwnProperty('fn')) {
+                uuid = element.fn
+            }
+            return {
+                dex: element.dex,
+                name: newName,
+                types: element.types,
+                shiny_released: element.shiny_released,
+                family: element.family,
+                uuid: uuid
+            }
+        })
+    res.json(response) 
+})
+
 app.get('/getallpokeinfo/:lang', (req, res) => {
     lang = req.params.lang
     

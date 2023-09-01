@@ -20,8 +20,13 @@ const GridContainer = () => {
 
   useEffect(() => {
     let apiUrl
+    console.log(sessionData)
     if (sessionData.selectedType === '') {
-      apiUrl = `http://localhost:3001/getallpokeinfo/${sessionData.selectedLanguage}`
+      if (sessionData.searchString === '') {
+        apiUrl = `http://localhost:3001/getallpokeinfo/${sessionData.selectedLanguage}`
+      } else {
+        apiUrl = `http://localhost:3001/searchforpokeid/${sessionData.searchString}/${sessionData.selectedLanguage}`
+      }
     } else {
       apiUrl = `http://localhost:3001/getfilteredpokeinfo/${sessionData.selectedType}/${sessionData.selectedLanguage}`
     }
@@ -35,7 +40,7 @@ const GridContainer = () => {
     .catch((error) => {
       console.error('Error fetching data:', error);
     })
-  }, [sessionData.selectedLanguage, sessionData.selectedType])
+  }, [sessionData.selectedLanguage, sessionData.selectedType, sessionData.searchString])
 
   return (
     <div className='grid-container'>

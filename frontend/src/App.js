@@ -2,6 +2,7 @@ import './App.css';
 import LanguageDropdown from './components/LanguageDropdown';
 import GridContainer from './components/GridContainer';
 import TypeDropdown from './components/TypeDropdown';
+import NumberSearch from './components/NumberSearch';
 import { SessionProvider } from './components/SessionContext';
 
 function App() {
@@ -9,13 +10,11 @@ function App() {
     <SessionProvider>
       <div className="App">
         <div className="top">
-          <div className="top-center">
-            <TypeDropdown />
-          </div>
-          <div className="top-right">
-            <LanguageDropdown />
-          </div>
+          <NumberSearch />
+          <TypeDropdown />
+          <LanguageDropdown />
         </div>
+        <hr />
 
         <div className='grid'>
           <GridContainer />
