@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Grid, Paper, Typography, Button } from '@mui/material';
 import { useSession } from './SessionContext';
 import TextField from '@mui/material/TextField';
+import PokedexDrawer from './PokedexDrawer';
 
 const GridContainer = () => {
 
@@ -79,21 +80,7 @@ const GridContainer = () => {
                 This Pokemon belongs to the family of {item.family} Pokemons. The right picture shows the shiny-released Pokemon.
                 This Pokemon is of type {item.types.length === 1 ? item.types[0] : `${item.types[0]} and ${item.types[1]}`}.
               </Typography>
-              <Button variant="outlined" onClick={toggleAdditionalInfo}>
-          {showAdditionalInfo ? 'Hide Additional Info' : 'Show Additional Info'}
-        </Button>
-        {showAdditionalInfo && (
-          <div>
-            <Typography>This is additional text for the selected Pokemon.</Typography>
-            <TextField
-              label="Enter Data"
-              variant="outlined"
-              value={userInput}
-              onChange={handleInputChange}
-            />
-            {/* Add more form elements or processing logic here */}
-          </div>
-        )}
+              <PokedexDrawer uuid={item.uuid}/>
             </Paper>
           </Grid>
         ))}

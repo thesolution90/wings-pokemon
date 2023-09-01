@@ -1,7 +1,7 @@
 const express = require('express')
 const path = require('path')
 const pokeList = require('./src/config/pokemon')
-
+const { getInformation, setInformation } = require('./src/database/redis')
 const app = express()
 
 const publicDirectoryPath = path.join(__dirname, 'public');
@@ -106,6 +106,15 @@ app.get('/getallpokeinfo/:lang', (req, res) => {
         }
     })
     res.json(response)
+})
+
+app.get('/pokedexinfo/:uuid', async (req, res) => {
+    uuid = req.params.uuid
+    res.json(await getInformation(uuid))
+})
+
+app.post('pokedexinfo', (req, res) => {
+    console.log('not operational')
 })
 
 app.listen(3001, () => console.log('Listening on port 3001'))
