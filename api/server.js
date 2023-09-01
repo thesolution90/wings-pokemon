@@ -24,8 +24,33 @@ app.get('/getimage/:pokeId/:isShiny', (req, res) => {
     res.sendFile(imagePath)
 })
 
-app.get('/getsinglepokeinfo/:searchtype/:payload/:lang', (req, res) => {
-    res.send('Not operational')
+app.get('/getfilteredpokeinfo/:type/:lang', (req, res) => {
+    const pokeType = req.params.type
+    const lang = req.params.lang
+
+    const response = pokeList
+        .filter((element) => element.types.includes(pokeType))
+        .map((element) => {
+            const newName = element.name[lang]
+            let uuid
+            if (element.hasOwnProperty('type')) {
+                uuid = `${element.dex.toString().padStart(3, '0')}${element.type}`
+            } else {
+                uuid = `${element.dex.toString().padStart(3, '0')}_00`
+            }
+            if (element.hasOwnProperty('fn')) {
+                uuid = element.fn
+            }
+            return {
+                dex: element.dex,
+                name: newName,
+                types: element.types,
+                shiny_released: element.shiny_released,
+                family: element.family,
+                uuid: uuid
+            }
+        })
+    res.json(response)        
 })
 
 app.get('/getallpokeinfo/:lang', (req, res) => {

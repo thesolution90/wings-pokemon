@@ -1,6 +1,6 @@
 // src/components/LanguageDropdown.js
 import React from 'react';
-import { Select, MenuItem } from '@mui/material'
+import { Select, MenuItem, FormControl, FormHelperText } from '@mui/material'
 import { useSession } from './SessionContext'
 
 const LanguageDropdown = () => {
@@ -13,21 +13,23 @@ const LanguageDropdown = () => {
 
   return (
     <div className="language-list">
-      <Select
-        name="selectList"
-        id="selectLanguage"
-        // defaultValue={'en'}
-        value={sessionData.selectedLanguage}
-        sx={{ minWidth: 120 }}
-        onChange={onLanguageChange}
-      >
-        <MenuItem value={'en'}>English</MenuItem>
-        <MenuItem value={'de'}>German</MenuItem>
-        <MenuItem value={'fr'}>French</MenuItem>
-        <MenuItem value={'ja'}>Japanese</MenuItem>
-        <MenuItem value={'kr'}>Korean</MenuItem>
-        <MenuItem value={'zh'}>Chinese</MenuItem>
-      </Select>
+      <FormControl sx={{ m: 1, minWidth: 150 }}>
+        <FormHelperText>Language</FormHelperText>
+        <Select
+          name="selectList"
+          id="selectLanguage"
+          // defaultValue={'en'}
+          value={sessionData.selectedLanguage}
+          onChange={onLanguageChange}
+        >
+          <MenuItem value={'en'}>English</MenuItem>
+          <MenuItem value={'de'}>German</MenuItem>
+          <MenuItem value={'fr'}>French</MenuItem>
+          <MenuItem value={'ja'}>Japanese</MenuItem>
+          <MenuItem value={'kr'}>Korean</MenuItem>
+          <MenuItem value={'zh'}>Chinese</MenuItem>
+        </Select>
+      </FormControl>
     </div>
   );
 };
