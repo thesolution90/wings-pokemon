@@ -1,5 +1,6 @@
 version: '3.8'
 services:
+# Definition der Datenbank
   database:
     image: redis:6.2-alpine
     restart: always
@@ -8,6 +9,7 @@ services:
     command: redis-server --save 20 1 --loglevel warning
     volumes: 
       - data:/data
+# Definition der API
   api:
     build: ./api
     ports:
@@ -17,6 +19,7 @@ services:
     environment:
       - REDIS_HOST=database
       - PUBLIC_IMAGE_PATCH=/static/
+# Definition des Frontends
   frontend:
     build: ./frontend
     ports:

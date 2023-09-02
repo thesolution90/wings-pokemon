@@ -1,3 +1,5 @@
+// Pokemon JSON Datei
+
 module.exports = [
     {
       "dex": 1,

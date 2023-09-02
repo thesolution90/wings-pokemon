@@ -1,4 +1,7 @@
-// SessionContext.js
+// Hier werden die Daten gespeichert die persistent während einer
+// Session gehalten werden
+
+// Das ist die gewählte Sprache, der gefilterte PokeType oder ein Suchstring
 
 import React, { createContext, useState, useContext } from 'react';
 

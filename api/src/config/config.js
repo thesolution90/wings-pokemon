@@ -2,6 +2,8 @@ const dotenv = require('dotenv')
 
 dotenv.config()
 
+// Erklärung s. README
+
 module.exports = {
   port: parseInt(process.env.PORT) || 3001,
   redis: {

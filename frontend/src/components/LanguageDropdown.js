@@ -3,6 +3,8 @@ import React from 'react';
 import { Select, MenuItem, FormControl, FormHelperText } from '@mui/material'
 import { useSession } from '../context/SessionContext'
 
+// Das Dropdown für die Sprachen
+
 const LanguageDropdown = () => {
 
   const { sessionData, updateSessionData } = useSession()

@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Button, TextField, Drawer, Typography, Divider } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
 
+// Der Drawer der sich öffnet, damit man Daten eingeben kann
+
 const PokedexDrawer = ({ uuid }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isTextFieldFocused, setIsTextFieldFocused] = useState(false);
   const [apiText, setApiText] = useState('')
   const [textFieldValue, setTextFieldValue] = useState('');
 
+  // alles Funktionen damit der Drawer richtig angezeigt wird
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
@@ -28,6 +31,7 @@ const PokedexDrawer = ({ uuid }) => {
     setIsTextFieldFocused(false);
   };
 
+  // Erhalten der richtigen TextDaten von der API
   const fetchDataAndUpdate = () => {
     fetch(`http://localhost:3001/api/annotation/${uuid}`)
       .then((response) => response.json())
@@ -42,6 +46,7 @@ const PokedexDrawer = ({ uuid }) => {
       });
   };
 
+  // Senden von neuen Daten an die API
   const handleUpdateEntry = () => {
     const val = textFieldValue;
     if (val) {
@@ -66,8 +71,8 @@ const PokedexDrawer = ({ uuid }) => {
     }
   }
 
+  // Wird verwendet um das Typography Feld zu aktualisieren
   useEffect(() => {
-    console.log('foo')
     fetchDataAndUpdate()
   }, []);
 

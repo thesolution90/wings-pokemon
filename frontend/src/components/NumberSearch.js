@@ -2,6 +2,8 @@ import React from 'react';
 import { FormControl, FormHelperText, TextField } from '@mui/material'
 import { useSession } from '../context/SessionContext'
 
+// Das Textfeld um nach einer PokeId zu suchen
+
 const NumberSearch = () => {
   const { updateSessionData } = useSession()
   const onPressEnter = (event) => {

@@ -2,6 +2,8 @@ import React from 'react';
 import { Select, MenuItem, FormControl, FormHelperText } from '@mui/material'
 import { useSession } from '../context/SessionContext'
 
+// Das Dropdown für den PokeType
+
 const TypeDropdown = () => {
 
   const { sessionData, updateSessionData } = useSession()
