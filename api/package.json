@@ -5,13 +5,18 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "api": "node server.js"
+    "api": "node src/server.js"
   },
   "author": "Christopher Becker",
   "license": "ISC",
   "dependencies": {
+    "compression": "^1.7.4",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "ioredis": "^5.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.48.0"
   }
 }
