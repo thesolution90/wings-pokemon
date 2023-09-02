@@ -1,13 +1,26 @@
 version: '3.8'
 services:
-  cache:
+  database:
     image: redis:6.2-alpine
     restart: always
     ports:
       - '6379:6379'
     command: redis-server --save 20 1 --loglevel warning
     volumes: 
-      - cache:/data
+      - data:/data
+  api:
+    build: ./api
+    ports:
+      - '3001:3001'
+    volumes:
+      - ./data/images:/static
+    environment:
+      - REDIS_HOST=database
+      - PUBLIC_IMAGE_PATCH=/static/
+  frontend:
+    build: ./frontend
+    ports:
+      - '3000:3000'
 volumes:
-  cache:
+  data:
     driver: local

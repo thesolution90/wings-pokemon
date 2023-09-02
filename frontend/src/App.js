@@ -3,7 +3,7 @@ import LanguageDropdown from './components/LanguageDropdown';
 import GridContainer from './components/GridContainer';
 import TypeDropdown from './components/TypeDropdown';
 import NumberSearch from './components/NumberSearch';
-import { SessionProvider } from './components/SessionContext';
+import { SessionProvider } from './context/SessionContext';
 
 function App() {
   return (

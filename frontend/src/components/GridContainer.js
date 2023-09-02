@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Grid, Paper, Typography } from '@mui/material';
-import { useSession } from './SessionContext';
+import { useSession } from '../context/SessionContext';
 import PokedexDrawer from './PokedexDrawer';
 
 const GridContainer = () => {

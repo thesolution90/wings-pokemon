@@ -1,6 +1,6 @@
 import React from 'react';
 import { Select, MenuItem, FormControl, FormHelperText } from '@mui/material'
-import { useSession } from './SessionContext'
+import { useSession } from '../context/SessionContext'
 
 const TypeDropdown = () => {
 

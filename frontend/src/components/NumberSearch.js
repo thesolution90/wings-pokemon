@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormControl, FormHelperText, TextField } from '@mui/material'
-import { useSession } from './SessionContext'
+import { useSession } from '../context/SessionContext'
 
 const NumberSearch = () => {
   const { updateSessionData } = useSession()
