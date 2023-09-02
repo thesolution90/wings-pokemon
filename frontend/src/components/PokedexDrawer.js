@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Button, TextField, Drawer } from '@mui/material'
+import { Button, TextField, Drawer, Typography, Divider } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
 
 const PokedexDrawer = ({ uuid }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isTextFieldFocused, setIsTextFieldFocused] = useState(false);
+  const [apiText, setApiText] = useState('')
   const [textFieldValue, setTextFieldValue] = useState('');
 
   const toggleDrawer = () => {
@@ -12,6 +13,10 @@ const PokedexDrawer = ({ uuid }) => {
   };
 
   const handleTextFieldClick = (event) => {
+    event.stopPropagation();
+  };
+
+  const handleTextFieldKeyDown = (event) => {
     event.stopPropagation();
   };
 
@@ -23,28 +28,47 @@ const PokedexDrawer = ({ uuid }) => {
     setIsTextFieldFocused(false);
   };
 
-  const handleTextFieldKeyDown = (event) => {
-    // Prevent the keydown event from propagating to parent elements and closing the drawer
-    event.stopPropagation();
-    // event.preventDefault();
-  };
-
-  const logtheshit = () => {
-    console.log(uuid)
-  }
-
-  useEffect(() => {
-    // Fetch data from your API when the component mounts
-    // Replace 'yourApiEndpoint' with the actual API endpoint you want to call
-    fetch('http://localhost:3001/pokedexinfo/bla')
+  const fetchDataAndUpdate = () => {
+    fetch(`http://localhost:3001/api/annotation/${uuid}`)
       .then((response) => response.json())
       .then((data) => {
-        // Update the state with the fetched data
-        setTextFieldValue(data.result); // Replace 'yourDataField' with the actual field you want to display
+        if (data.result === null) {
+          data.result = 'Nothing stored yet'
+        }
+        setApiText(data.result);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
+  };
+
+  const handleUpdateEntry = () => {
+    const val = textFieldValue;
+    if (val) {
+      fetch(`http://localhost:3001/api/annotation/${uuid}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: val,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setTextFieldValue('');
+          fetchDataAndUpdate()
+        })
+        .catch((error) => {
+          console.error('Error sending POST request:', error);
+        });
+    }
+  }
+
+  useEffect(() => {
+    console.log('foo')
+    fetchDataAndUpdate()
   }, []);
 
 
@@ -63,8 +87,12 @@ const PokedexDrawer = ({ uuid }) => {
             onClick={toggleDrawer}
             onKeyDown={toggleDrawer}
           >
+            <Typography sx={{ fontSize: 16, marginBottom: '16px', marginTop: '16px', marginLeft: '10px', marginRight: '10px' }}>
+              {apiText}
+            </Typography>
+            <Divider></Divider>
             <TextField
-              label="Enter Text"
+              label="Fill in your information"
               multiline
               rows={4}
               variant="outlined"
@@ -74,9 +102,10 @@ const PokedexDrawer = ({ uuid }) => {
               onBlur={handleTextFieldBlur}
               onKeyDown={handleTextFieldKeyDown}
               value={textFieldValue}
+              onChange={(e) => setTextFieldValue(e.target.value)}
             />
           </div>
-          <Button onClick={logtheshit}>Update entry</Button>
+          <Button onClick={handleUpdateEntry}>Update entry</Button>
         </Drawer>
       </div>
     );

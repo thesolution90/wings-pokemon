@@ -1,35 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, Paper, Typography, Button } from '@mui/material';
+import { Grid, Paper, Typography } from '@mui/material';
 import { useSession } from './SessionContext';
-import TextField from '@mui/material/TextField';
 import PokedexDrawer from './PokedexDrawer';
 
 const GridContainer = () => {
 
   const [data, setData] = useState([])
   const { sessionData } = useSession()
-  const [userInput, setUserInput] = useState('')
-  const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
-
-  const toggleAdditionalInfo = () => {
-    setShowAdditionalInfo(!showAdditionalInfo);
-  };
-
-  const handleInputChange = (event) => {
-    setUserInput(event.target.value); // Update the user input state
-  };
 
   useEffect(() => {
     let apiUrl
     console.log(sessionData)
     if (sessionData.selectedType === '') {
       if (sessionData.searchString === '') {
-        apiUrl = `http://localhost:3001/getallpokeinfo/${sessionData.selectedLanguage}`
+        apiUrl = `http://localhost:3001/api/getall/${sessionData.selectedLanguage}`
       } else {
-        apiUrl = `http://localhost:3001/searchforpokeid/${sessionData.searchString}/${sessionData.selectedLanguage}`
+        apiUrl = `http://localhost:3001/api/search/${sessionData.searchString}/${sessionData.selectedLanguage}`
       }
     } else {
-      apiUrl = `http://localhost:3001/getfilteredpokeinfo/${sessionData.selectedType}/${sessionData.selectedLanguage}`
+      apiUrl = `http://localhost:3001/api/filter/${sessionData.selectedType}/${sessionData.selectedLanguage}`
     }
     fetch(apiUrl, {
       method: 'GET'
@@ -66,14 +55,16 @@ const GridContainer = () => {
               <Typography variant="h6">{item.name}</Typography>
               <div style={{ display: 'flex', gap: '16px' }}>
                 <img loading="lazy"
-                  src={`http://localhost:3001/getimage/${item.uuid}/false`}
+                  src={`http://localhost:3001/api/getimage/${item.uuid}/false`}
                   alt={`Pokemon ${item.dex}`}
                   style={{ maxWidth: '150px'}}
+                  crossOrigin="anonymous"
                 />
                 <img loading="lazy"
-                  src={`http://localhost:3001/getimage/${item.uuid}/true`}
+                  src={`http://localhost:3001/api/getimage/${item.uuid}/true`}
                   alt={`Shiny Pokemon ${item.dex}`}
                   style={{ maxWidth: '150px'}}
+                  crossOrigin="anonymous"
                 />
               </div>
               <Typography sx={{ fontSize: 12 }}>
