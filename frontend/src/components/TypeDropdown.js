@@ -3,10 +3,12 @@ import { Select, MenuItem, FormControl, FormHelperText } from '@mui/material'
 import { useSession } from '../context/SessionContext'
 
 // Das Dropdown für den PokeType
-
 const TypeDropdown = () => {
 
+  // Laden der Session Daten
   const { sessionData, updateSessionData } = useSession()
+
+  // Update der Session Daten -> Leeren des Suchstrings und füllen des Filters
   const onFilterChange = (event) => {
     const selectedType = event.target.value
     const searchString = ''

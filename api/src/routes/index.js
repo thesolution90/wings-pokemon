@@ -6,16 +6,22 @@ const router = express.Router()
 
 // In dieser Datei stehen alle Routen dieser Schnittstelle.
 
+// Endpunkt für alle Bilder zum Download
+// uuid in der Form id_type. Bspw: 001_00
+// IsShiny: true oder false
 router
-  .route('/getimage/:pokeId/:isShiny')
+  .route('/getimage/:uuid/:isShiny')
   .get((req, res) => {
     // Extraktion der Pfadparameter
-    const pokeId = req.params.pokeId
+    const uuid = req.params.uuid
     const isShiny = JSON.parse(req.params.isShiny.toLowerCase())
     // Ausführung der Funktion und Senden der Rückmeldung
-    res.status(200).sendFile(local.getImagePath(pokeId, isShiny))    
+    res.status(200).sendFile(local.getImagePath(uuid, isShiny))    
   })
 
+// Endpunkt wo gefiltete Pokemons zurückgegeben werden
+// Type: Filterbegriff
+// Lang: Sprache
 router
   .route('/filter/:type/:lang')
   .get((req, res) => {
@@ -26,6 +32,9 @@ router
     res.json(local.filterForPokemonType(pokeType, lang))      
   })
 
+// Endpunkt bei dem nach einer PokeId gesucht werden kann
+// ID: Suchbegriff
+// Lang: Sprache
 router
   .route('/search/:id/:lang')
   .get((req, res) => {
@@ -36,6 +45,8 @@ router
     res.json(local.searchForPokemonId(pokeId, lang))    
   })
 
+// Auslieferung aller Pokemons
+// Lang: Sprache
 router
   .route('/getall/:lang')
   .get((req, res) => {
@@ -45,6 +56,8 @@ router
     res.json(local.getAllPokemonsInLanguage(lang))    
   })
 
+// Schreiben (POST) und Lesen (GET) der Kommentare
+// uuid s.o.
 router
   .route('/annotation/:uuid')
   .get(async (req, res) => {

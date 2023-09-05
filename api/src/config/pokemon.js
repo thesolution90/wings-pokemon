@@ -1,5 +1,4 @@
-// Pokemon JSON Datei
-
+// Pokemon JSON Datei (unverändert von der WINGS Plattform)
 module.exports = [
     {
       "dex": 1,

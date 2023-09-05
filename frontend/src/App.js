@@ -5,8 +5,7 @@ import TypeDropdown from './components/TypeDropdown';
 import NumberSearch from './components/NumberSearch';
 import { SessionProvider } from './context/SessionContext';
 
-// Hier die Definition des Landing Page
-
+// Hier die Definition der Landing Page
 function App() {
   return (
     <SessionProvider>

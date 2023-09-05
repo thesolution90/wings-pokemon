@@ -10,23 +10,32 @@ const PokedexDrawer = ({ uuid }) => {
   const [apiText, setApiText] = useState('')
   const [textFieldValue, setTextFieldValue] = useState('');
 
-  // alles Funktionen damit der Drawer richtig angezeigt wird
+  // Öffnen und Schließen des Drawers
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
 
+  // Damit der Drawer offen bleibt
   const handleTextFieldClick = (event) => {
     event.stopPropagation();
   };
 
+  // Damit der Drawer offen bleibt. Wenn Enter gedrückt wird,
+  // werden die vorhandenen Daten geschrieben
   const handleTextFieldKeyDown = (event) => {
     event.stopPropagation();
+    if (event.key === 'Enter') {
+      // Updaten der API
+      handleUpdateEntry()
+    }
   };
 
+  // Damit der Drawer offen bleibt
   const handleTextFieldFocus = () => {
     setIsTextFieldFocused(true);
   };
 
+  // Damit der Drawer offen bleibt
   const handleTextFieldBlur = () => {
     setIsTextFieldFocused(false);
   };
@@ -36,6 +45,7 @@ const PokedexDrawer = ({ uuid }) => {
     fetch(`http://localhost:3001/api/annotation/${uuid}`)
       .then((response) => response.json())
       .then((data) => {
+        // Falls nichts gespeichert ist
         if (data.result === null) {
           data.result = 'Nothing stored yet'
         }
@@ -62,6 +72,7 @@ const PokedexDrawer = ({ uuid }) => {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
+          // Textfeld leeren und Typography updaten
           setTextFieldValue('');
           fetchDataAndUpdate()
         })

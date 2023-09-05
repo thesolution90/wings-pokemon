@@ -6,21 +6,25 @@ import PokedexDrawer from './PokedexDrawer';
 const GridContainer = () => {
 
   const [data, setData] = useState([])
+  // Laden der Daten der Session
   const { sessionData } = useSession()
 
   useEffect(() => {
     let apiUrl
+    // Hier wird geschaut was in der sessionData Variable geschrieben ist
     console.log(sessionData)
     // Erstmal wird geschaut was wir überhaupt für Sachen von der API haben wollen
     if (sessionData.selectedType === '') {
       // Wenn keine Filterung dann enweder nur neue Sprache oder Suchbegriff
       if (sessionData.searchString === '') {
+        // API Call ohne Filterung und Suche
         apiUrl = `http://localhost:3001/api/getall/${sessionData.selectedLanguage}`
       } else {
+        // API Call für die Suche
         apiUrl = `http://localhost:3001/api/search/${sessionData.searchString}/${sessionData.selectedLanguage}`
       }
     } else {
-      // Sonst doch Filterung
+      // API Call für die Filterung
       apiUrl = `http://localhost:3001/api/filter/${sessionData.selectedType}/${sessionData.selectedLanguage}`
     }
     fetch(apiUrl, {
@@ -33,7 +37,8 @@ const GridContainer = () => {
     .catch((error) => {
       console.error('Error fetching data:', error);
     })
-  // Im Array stehen die Parameter, bei deren *nderung diese Funktion ausgeführt wird
+  // Im Array stehen die Parameter, bei deren Änderung diese Funktion ausgeführt wird
+  // Also beim Ändern der Sprache, beim Filtern und beim Suchen
   }, [sessionData.selectedLanguage, sessionData.selectedType, sessionData.searchString])
 
 // Hier wird das Grid zusammengebaut (durch eine Schleife)

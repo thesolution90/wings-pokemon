@@ -2,8 +2,9 @@ const dotenv = require('dotenv')
 
 dotenv.config()
 
-// Erklärung s. README
-
+// Bedeutung s. README
+// Hier werden die Umgebungsvariablen geladen und in ein JSON Objekt verpackt,
+// damit die API leicht darauf zugreifen kann.
 module.exports = {
   port: parseInt(process.env.PORT) || 3001,
   redis: {
