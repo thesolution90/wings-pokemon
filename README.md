@@ -2,17 +2,27 @@
 
 ## Voraussetzungen
 
-Installation von `docker` bzw. `docker-compose`
+Installation von `docker` bzw. `docker compose`
+
+Informationen dazu finden sich [hier](https://docs.docker.com/engine/install/).
 
 ## Starten der App
+
+Erstmalig müssen alle Images erzeugt werden. Dies wird über den Befehl
+
+```bash
+docker compose build
+```
+erreicht.
 
 Die App wird über den Befehl
 
 ```bash
-docker compose up (-d)
+docker compose up
 ```
-
 gestartet.
+
+Die App kann nun über den Browser unter der URL [http://localhost:3000](http://localhost:3000) erreicht werden.
 
 ## Struktur dieses Repositories
 
@@ -30,6 +40,6 @@ Es gibt vier Variablen die zur Konfiguration der API diesen:
 - `REDIS_PORT` (default 6379): Portnummer der Redis Datenbank
 - `PUBLIC_IMAGE_PATH` (default /home/thesolution/Documents/Studium/pokemon-wings/data/images/): Der Ort an dem die Bilder abliegen, damit die API darauf zugreifen kann
 
-
 ### Autor
+
 * Christopher Becker
