@@ -1,5 +1,7 @@
 # Pokemon App
 
+> Warning: This repository is not for production use nor it is maintained. This repository is only for showcase purposes.
+
 ## Voraussetzungen
 
 Installation von `docker` bzw. `docker compose`
