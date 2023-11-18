@@ -13,7 +13,7 @@ export const useSession = () => {
 };
 
 export const SessionProvider = ({ children }) => {
-  // Hier sind die Kontext Variablen definitert
+  // Hier sind die Kontext Variablen definiert
   const [sessionData, setSessionData] = useState({ selectedLanguage: 'en', selectedType: '', searchString: '' });
 
   const updateSessionData = (newData) => {
